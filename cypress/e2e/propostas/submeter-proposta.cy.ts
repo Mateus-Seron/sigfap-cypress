@@ -235,7 +235,7 @@ describe("Submissão de proposta de edital no sistema", () => {
           cy.get('[data-cy="select-categories-documento-prop"]').click();
           cy.get('[data-cy="documento-1"]').click();
           cy.get('[data-cy="documentoPropostaAnexo-upload"]')
-            .selectFile('cypress\\downloads\\documento-de-identificacao-com-foto.pdf', {force: true});
+            .selectFile('cypress\\fixtures\\rg.pdf', {force: true});
         cy.get('[data-cy="next-button"]').click();
         cy.get('[data-cy="next-button"]').click();
         cy.get('[data-cy="termo-de-aceite-aceito-box"]').click();
