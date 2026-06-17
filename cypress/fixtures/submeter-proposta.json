@@ -1,7 +1,20 @@
 {
-  "valorTitulo": "Título da Proposta",
-  "valorTexto": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  "valorData": "15/07/2026",
+  "email": "lucas.g.a.souza@ufms.br",
+  "senha": "Lucas123!",
+  "tituloProposta": "Título da Proposta",
+  "duracaoProposta": "10",
+  "descricaoProposta": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "valorData": "07022026",
+  "valorTextoGenerico": "Lorem ipsum.",
+  "nomePesquisador": "Mateus Miranda Seron",
+  "tituloAtividade": "Título da Atividade",
   "valorQuantidade": "5",
-  "valorPreco": "15000"
+  "valorPreco": "5000",
+  "outroValorQuantidade": "10",
+  "outroValorPreco": "3650",
+  "estado": "Acre{enter}",
+  "outroEstado": "Mato Grosso do Sul{enter}",
+  "valorTotal": "750000",
+  "cotacaoMoeda": "500",
+  "arquivoPDF": "cypress\\fixtures\\rg.pdf"
 }
