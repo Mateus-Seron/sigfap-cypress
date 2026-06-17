@@ -1,0 +1,21 @@
+{
+  "email": "joao.neves@sig.com",
+  "senha": "@Dev12345",
+  "cep": "79065-700",
+  "numero": "267",
+  "instituicao": "UFMS/Universidade Federal do Mato Grosso do Sul",
+  "unidade": "FACOM",
+  "nivelAcademico": "Ensino Superior",
+  "lattes": "http://lattes.cnpq.br/12345678teste",
+  "linkedin": "https://www.linkedin.com/in/joaotestandosig",
+  "grandeArea": "Ciências Exatas e da Terra",
+  "area": "Ciência da Computação",
+  "subArea": "Sistemas de Computação",
+  "especialidade": "Software Básico",
+  "tipoVinculo": "Servidor Público",
+  "inicioServico": "14/01/2026",
+  "regimeTrabalho": "Tempo Integral",
+  "funcao": "Gerente",
+  "inicioFuncao": "10/06/2026",
+  "documentoIdentificacao": "rg.pdf"
+}

@@ -1,13 +1,14 @@
-import { toCyString } from "../helpers/kebab.helper";
+import { toCyString } from "../../helpers/kebab.helper";
 
 describe("Criação de conta no sistema", () => {
+  
+  beforeEach(() => {
+    cy.visit("/");
+  });
+
   context("Criação de conta com dados válidos", () => {
-    beforeEach(() => {
-      cy.visit("/");
-    });
+
     it("Teste para criação de conta com dados válidos", () => {
-      //visita a base URL definida no cypress.config.js, que é "https://novo-sig.homolog.ledes.net/". Isso garante que o teste comece na página inicial do sistema.
-      cy.visit("/");
       cy.get('[data-cy="register-button"]').click(); //clica no botão "Criar conta" para iniciar o processo de criação de conta.
       cy.fixture("criar-conta").then((dados) => {
         //A fixture é utilizada para carregar os dados de teste a partir do arquivo "criar-conta.json". O método "then" é usado para acessar os dados carregados e utilizá-los no teste.
@@ -35,6 +36,30 @@ describe("Criação de conta no sistema", () => {
       cy.fixture("criar-conta").then((dados) => {
         cy.typeLogin(dados.email, dados.senha);
         cy.get('[data-cy="user-menu"]').should("be.visible"); // Verifica se o menu do usuário está visível, indicando que o login foi bem-sucedido
+      });
+    });
+  });
+
+  context("CT-SIG-CADASTRO-002 - Criação de conta com caminho alternativo", () => {
+ 
+    it("Teste para criação de conta com negação dos termos de uso", () => {
+      cy.get('[data-cy="register-button"]').click(); //clica no botão "Criar conta" para iniciar o processo de criação de conta.
+      cy.fixture("criar-conta").then((dados) => {
+        cy.get('[data-cy="nome"]').type(dados.nome);
+        cy.get('[data-cy="dataNascimento"]').type(dados.dataNascimento);
+        cy.get('[data-cy="open-sexo"]').click();
+        cy.get('[data-cy="' + toCyString(dados.sexo) + '"]').click();
+        cy.get('[data-cy="documento"]').type(dados.cpf);
+        cy.get('[data-cy="register-next-button"]').click(); //botão "Próximo"
+        cy.get('[data-cy="email"]').type(dados.email);
+        cy.get('[data-cy="senha"]').type(dados.senha);
+        cy.get('[data-cy="senhaConfirmar"]').type(dados.senhaConfirmar);
+        cy.wait(100);
+        cy.get('[data-cy="register-next-button"]').click(); //botão "Próximo"
+        cy.wait(100);
+        cy.get('[data-cy="negarTermo"]').click(); //checkbox "Não aceitar termos de uso"
+        cy.wait(1000);
+        cy.get('[data-cy="loginButton"]').should("be.visible"); // Verifica se o botão da tela de login está visível
       });
     });
   });
