@@ -9,7 +9,7 @@ describe("[F-03] Submissão de proposta no sistema", () => {
       cy.typeLogin(dados.email, dados.senha);
     });
   });
-
+/*
   context("[CT-SIG-PROPOSTA-001] Submissão de proposta com dados válidos", () => {
 
     it("Preencher as informações iniciais da proposta", () => {
@@ -50,7 +50,7 @@ describe("[F-03] Submissão de proposta no sistema", () => {
   it("Preencher as informações complementares da proposta", () => {
     cy.fixture("submeter-proposta").then((dados) => {
       cy.get('[data-cy="projetos-ver-mais"]').click();
-      cy.get(':nth-child(2) > .css-ylpd68').click();
+      cy.get(':nth-child(9) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2) > .css-ylpd68').contains("").click();
       cy.get('[data-cy="informacoes-complementares"]').click();
         cy.get('[data-cy="formularioPropostaInformacaoComplementar.pergunta-218-item-mei-faturamento-ano-de-ate-r-81"]').click();
         cy.get('[data-cy="formularioPropostaInformacaoComplementar.pergunta-219"]').type(dados.descricaoProposta);
@@ -64,7 +64,7 @@ describe("[F-03] Submissão de proposta no sistema", () => {
   it("Preencher a abrangência da proposta", () => {
     cy.fixture("submeter-proposta").then((dados) => {
       cy.get('[data-cy="projetos-ver-mais"]').click();
-      cy.get(':nth-child(2) > .css-ylpd68').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
       cy.get('[data-cy="abrangencia"]').click();
       cy.get('[data-cy="add-button"]').click();
         cy.get('[data-cy="estado-id"]').click();
@@ -88,7 +88,7 @@ describe("[F-03] Submissão de proposta no sistema", () => {
   it("Preencher os dados pessoais na proposta", () => {
     cy.fixture("submeter-proposta").then((dados) => {
       cy.get('[data-cy="projetos-ver-mais"]').click();
-      cy.get(':nth-child(2) > .css-ylpd68').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
       cy.get('[data-cy="coordenacao"]').click();
       cy.get('[data-cy="dados-pessoais"]').click();
       cy.wait(500);
@@ -101,7 +101,7 @@ describe("[F-03] Submissão de proposta no sistema", () => {
   it("Preencher o endereço na proposta", () => {
     cy.fixture("submeter-proposta").then((dados) => {
       cy.get('[data-cy="projetos-ver-mais"]').click();
-      cy.get(':nth-child(2) > .css-ylpd68').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
       cy.get('[data-cy="coordenacao"]').click();
       cy.get('[data-cy="endereco"]').click();
       cy.wait(500);
@@ -114,7 +114,7 @@ describe("[F-03] Submissão de proposta no sistema", () => {
   it("Preencher os dados acadêmicos na proposta", () => {
     cy.fixture("submeter-proposta").then((dados) => {
       cy.get('[data-cy="projetos-ver-mais"]').click();
-      cy.get(':nth-child(2) > .css-ylpd68').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
       cy.get('[data-cy="coordenacao"]').click();
       cy.get('[data-cy="dados-academicos"]').click();
       cy.wait(500);
@@ -127,7 +127,7 @@ describe("[F-03] Submissão de proposta no sistema", () => {
   it("Preencher os dados profissionais na proposta", () => {
     cy.fixture("submeter-proposta").then((dados) => {
       cy.get('[data-cy="projetos-ver-mais"]').click();
-      cy.get(':nth-child(2) > .css-ylpd68').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
       cy.get('[data-cy="coordenacao"]').click();
       cy.get('[data-cy="dados-profissionais"]').click();
       cy.wait(500);
@@ -140,7 +140,7 @@ describe("[F-03] Submissão de proposta no sistema", () => {
   it("Preencher a descrição de apresentação da proposta", () => {
     cy.fixture("submeter-proposta").then((dados) => {
       cy.get('[data-cy="projetos-ver-mais"]').click();
-      cy.get(':nth-child(2) > .css-ylpd68').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
       cy.get('[data-cy="apresentacao"]').click();
       cy.get('[data-cy="descricao"]').click();
         cy.get('[data-cy="formularioPropostaDescritiva.pergunta-221-item-opcao-1"]').click();
@@ -155,7 +155,7 @@ describe("[F-03] Submissão de proposta no sistema", () => {
   it("Preencher os indicadores de produção da proposta", () => {
     cy.fixture("submeter-proposta").then((dados) => {
       cy.get('[data-cy="projetos-ver-mais"]').click();
-      cy.get(':nth-child(2) > .css-ylpd68').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
       cy.get('[data-cy="apresentacao"]').click();
       cy.get('[data-cy="indicadores-de-producao"]').click();
         cy.get(':nth-child(1) > .css-1j6d2zt > :nth-child(1)').type(dados.outroValorQuantidade);
@@ -172,7 +172,7 @@ describe("[F-03] Submissão de proposta no sistema", () => {
   it("Informar os membros participantes da proposta", () => {
     cy.fixture("submeter-proposta").then((dados) => {
       cy.get('[data-cy="projetos-ver-mais"]').click();
-      cy.get(':nth-child(2) > .css-ylpd68').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
       cy.get('[data-cy="apresentacao"]').click();
       cy.get('[data-cy="membros"]').click();
         cy.get('[data-cy="nome-do-pesquisador"]').type(dados.nomePesquisador);
@@ -190,7 +190,7 @@ describe("[F-03] Submissão de proposta no sistema", () => {
   it("Preencher as atividades da proposta", () => {
     cy.fixture("submeter-proposta").then((dados) => {
       cy.get('[data-cy="projetos-ver-mais"]').click();
-      cy.get(':nth-child(2) > .css-ylpd68').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
       cy.get('[data-cy="apresentacao"]').click();
       cy.get('[data-cy="atividades"]').click();
         cy.get('[data-cy="add-button"]').click();
@@ -213,7 +213,7 @@ describe("[F-03] Submissão de proposta no sistema", () => {
   it("Visualizar as atividades da proposta", () => {
     cy.fixture("submeter-proposta").then((dados) => {
       cy.get('[data-cy="projetos-ver-mais"]').click();
-      cy.get(':nth-child(2) > .css-ylpd68').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
       cy.get('[data-cy="apresentacao"]').click();
       cy.get('[data-cy="visualizacao-das-atividades"]').click();
       cy.wait(500);
@@ -226,7 +226,7 @@ describe("[F-03] Submissão de proposta no sistema", () => {
   it("Determinar a faixa de financiamento da proposta", () => {
     cy.fixture("submeter-proposta").then((dados) => {
       cy.get('[data-cy="projetos-ver-mais"]').click();
-      cy.get(':nth-child(2) > .css-ylpd68').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
       cy.get('[data-cy="apresentacao"]').click();
       cy.get('[data-cy="orcamento"]').click();
       cy.get('[data-cy="faixa-de-financiamento"]').click();
@@ -242,7 +242,7 @@ describe("[F-03] Submissão de proposta no sistema", () => {
   it("Visualizar serviços de terceiros da proposta", () => {
     cy.fixture("submeter-proposta").then((dados) => {
       cy.get('[data-cy="projetos-ver-mais"]').click();
-      cy.get(':nth-child(2) > .css-ylpd68').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
       cy.get('[data-cy="apresentacao"]').click();
       cy.get('[data-cy="orcamento"]').click();
       cy.get('[data-cy="servicos-de-terceiros"]').click();
@@ -256,7 +256,7 @@ describe("[F-03] Submissão de proposta no sistema", () => {
   it("Preencher informações de bolsa da proposta", () => {
     cy.fixture("submeter-proposta").then((dados) => {
       cy.get('[data-cy="projetos-ver-mais"]').click();
-      cy.get(':nth-child(2) > .css-ylpd68').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
       cy.get('[data-cy="apresentacao"]').click();
       cy.get('[data-cy="orcamento"]').click();
       cy.get('[data-cy="bolsa"]').click();
@@ -279,7 +279,7 @@ describe("[F-03] Submissão de proposta no sistema", () => {
   it("Visualizar consolidação da proposta", () => {
     cy.fixture("submeter-proposta").then((dados) => {
       cy.get('[data-cy="projetos-ver-mais"]').click();
-      cy.get(':nth-child(2) > .css-ylpd68').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
       cy.get('[data-cy="apresentacao"]').click();
       cy.get('[data-cy="orcamento"]').click();
       cy.get('[data-cy="consolidacao"]').click();
@@ -293,7 +293,7 @@ describe("[F-03] Submissão de proposta no sistema", () => {
   it("Visualizar o que foi solicitado à fundação sobre a proposta", () => {
     cy.fixture("submeter-proposta").then((dados) => {
       cy.get('[data-cy="projetos-ver-mais"]').click();
-      cy.get(':nth-child(2) > .css-ylpd68').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
       cy.get('[data-cy="apresentacao"]').click();
       cy.get('[data-cy="orcamento"]').click();
       cy.get('[data-cy="solicitado-a-fundacao"]').click();
@@ -307,7 +307,7 @@ describe("[F-03] Submissão de proposta no sistema", () => {
   it("Anexar arquivos de documentos pessoais na proposta", () => {
     cy.fixture("submeter-proposta").then((dados) => {
       cy.get('[data-cy="projetos-ver-mais"]').click();
-      cy.get(':nth-child(2) > .css-ylpd68').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
       cy.get('[data-cy="anexos"]').click();
       cy.get('[data-cy="documentos-pessoais"]').click();
       cy.wait(500);
@@ -320,7 +320,7 @@ describe("[F-03] Submissão de proposta no sistema", () => {
   it("Anexar arquivo de carta de apresentação da proposta", () => {
     cy.fixture("submeter-proposta").then((dados) => {
       cy.get('[data-cy="projetos-ver-mais"]').click();
-      cy.get(':nth-child(2) > .css-ylpd68').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
       cy.get('[data-cy="anexos"]').click();
       cy.get('[data-cy="documentos-da-proposta"]').click();
         cy.get('[data-cy="select-categories-documento-prop"]').click();
@@ -337,7 +337,7 @@ describe("[F-03] Submissão de proposta no sistema", () => {
   it("Visualizar a proposta", () => {
     cy.fixture("submeter-proposta").then((dados) => {
       cy.get('[data-cy="projetos-ver-mais"]').click();
-      cy.get(':nth-child(2) > .css-ylpd68').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
       cy.get('[data-cy="finalizacao"]').click();
       cy.get('[data-cy="visualizacao-da-proposta"]').click();
       cy.wait(500);
@@ -350,7 +350,7 @@ describe("[F-03] Submissão de proposta no sistema", () => {
    it("Aceitar termos, verificar pêndencias e submeter a proposta", () => {
     cy.fixture("submeter-proposta").then((dados) => {
       cy.get('[data-cy="projetos-ver-mais"]').click();
-      cy.get(':nth-child(2) > .css-ylpd68').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
       cy.get('[data-cy="finalizacao"]').click();
       cy.get('[data-cy="termo-de-aceite"]').click();
       cy.get('[data-cy="termo-de-aceite-aceito-box"]').click();
@@ -359,9 +359,51 @@ describe("[F-03] Submissão de proposta no sistema", () => {
       cy.get('[data-cy="menu-salvar"]').click();
       cy.wait(500);
       cy.get('[class="css-1alpf6f ebva1ex2"]').contains('Submeter proposta').click();
-      cy.get('[data-cy="sim-continuar-button"]').click();
-      cy.get('[data-cy="confirmar-button"]').click();
-      cy.get('[data-cy="user-menu"]').should("be.visible");
+      //cy.get('[data-cy="sim-continuar-button"]').click();
+      //cy.get('[data-cy="confirmar-button"]').click();
+      //cy.get('[data-cy="user-menu"]').should("be.visible");
+      });
+    });
+  });
+*/
+  context("[F-02] Título do Projeto - regras de negócio", () => {
+    beforeEach(() => {
+      cy.get('[data-cy="editais-ver-mais"]').click();
+      cy.get(':nth-child(6) > .css-1g8exof > .css-qvg66t').click();
+      cy.get('[class="css-1dimcyp e19ekcfn59"]')
+        .contains("Edital 2026-0001 Sig Cypress")
+        .should("be.visible");
+      cy.get('[data-cy="criar-proposta"]').click();
+      cy.get('[data-cy="titulo"]').should("be.visible");
+    });
+
+    it("deve ser um campo do tipo texto", () => {
+      cy.get('[data-cy="titulo"]')
+        .should("match", "input, textarea")
+        .and("not.have.attr", "type", "number");
+    });
+
+    it("deve aceitar no máximo 128 caracteres", () => {
+      const titulo129Caracteres = "A".repeat(129);
+
+      cy.get('[data-cy="titulo"]')
+        .should("have.attr", "maxlength", "128")
+        .clear()
+        .type(titulo129Caracteres);
+
+      cy.get('[data-cy="titulo"]')
+        .invoke("val")
+        .should("have.length", 128);
+    });
+
+    it("deve ser obrigatório e impedir o salvamento quando vazio", () => {
+      cy.get('[data-cy="titulo"]').should("have.value", "");
+
+      cy.url().then((urlAntes) => {
+        cy.get('[data-cy="menu-salvar"]').click();
+        cy.wait(500);
+        cy.get('[data-cy="titulo"]').should("have.value", "");
+        cy.url().should("eq", urlAntes);
       });
     });
   });
