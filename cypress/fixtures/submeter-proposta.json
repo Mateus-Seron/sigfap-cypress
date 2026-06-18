@@ -8,7 +8,7 @@
   "nomePesquisador": "Mateus Miranda Seron",
   "tituloAtividade": "Título da Atividade",
   "valorQuantidade": "5",
-  "outroValorQuantidade": 2,
+  "outroValorQuantidade": "2",
   "valorPreco": "5000",
   "arquivoPDF": "cypress\\fixtures\\rg.pdf"
 }
