@@ -1,250 +1,367 @@
 import { toCyString } from "../../helpers/kebab.helper";
 
-describe("Submissão de proposta de edital no sistema", () => {
-  context("Submissão de proposta com dados válidos, exceto inclusão de outros participantes e quantidade de itens no formulário", () => {
-    /*
-    beforeEach(() => {
-      cy.visit("/");
+describe("Submissão de proposta no sistema", () => {
+
+  beforeEach(() => {
+    cy.fixture("submeter-proposta")
+    .as("dados")
+    .then((dados) => {
+      cy.typeLogin(dados.email, dados.senha);
     });
-    */
-    it("Teste para submissão de proposta com dados válidos", () => {
-      cy.fixture("criar-conta").then(() => {
-        cy.typeLogin("lucas.g.a.souza@ufms.br", "Lucas123!");
-        cy.get('[data-cy="user-menu"]').should("be.visible");
-      });
-      cy.wait(500);
-      cy.fixture("submeter-proposta").then(() => {
-        cy.get('[data-cy="editais-edital-002-lancamento-de-notas"]').click();
+  });
+
+  context("Submissão de proposta com dados válidos", () => {
+
+    it("Preencher as informações iniciais da proposta", () => {
+      cy.fixture("submeter-proposta").then((dados) => {
+        cy.get('[data-cy="editais-ver-mais"]').click();
+        cy.get(':nth-child(6) > .css-1g8exof > .css-qvg66t').click();
+        cy.get('[class="css-1dimcyp e19ekcfn59"]').contains("Edital 2026-0001 Sig Cypress").should("be.visible");
         cy.get('[data-cy="criar-proposta"]').click();
-          cy.get('[data-cy="titulo"]').type("Título da Proposta");
-          cy.get('[data-cy="duracao"]').clear().type("10");
-          cy.get('[data-cy="instituicao-executora-id"]').click();
-          cy.get('[data-cy="funda-fundacao"]').click();
-          cy.get('[data-cy="unidade-executora-id"]').click();
-          cy.get('[data-cy="ms-ufms"]').click();
-          cy.get('[data-cy="add-areas-de-conhecimento"]').click();
-            cy.get('[data-cy="grande-area-id"]').click();
-            cy.get('[data-cy="ciencias-agrarias"]').click();
-            cy.get('[data-cy="area-id"').click();
-            cy.get('[data-cy="agronomia"]').click();
-            cy.get('[data-cy="sub-area-id"]').click();
-            cy.get('[data-cy="floricultura-parques-e-jardins"]').click();
-            cy.get('[data-cy="especialidade-id"]').click();
-            cy.get('[data-cy="floricultura"]').click();
-            cy.get('[data-cy="areaDeConhecimento-confirmar"]').click();
-        //cy.get('[data-cy="menu-salvar"]').click();
-        cy.get('[data-cy="next-button"]').click();
-          cy.get('[data-cy="formularioPropostaInformacaoComplementar.pergunta-28-item-ods02-erradicar-a-fome-alcancar"]').click();
-          cy.get('[data-cy="formularioPropostaInformacaoComplementar.pergunta-29-item-micro-faturamento-ano-de-r-81-00"]').click();
-          cy.get('[data-cy="formularioPropostaInformacaoComplementar.pergunta-30-item-agronegocios"]').click();
-          cy.get('[data-cy="formularioPropostaInformacaoComplementar.pergunta-30-item-sustentabilidade"]').click();
-          cy.get('[data-cy="formularioPropostaInformacaoComplementar.pergunta-31"]').type("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
-          cy.get('[data-cy="formularioPropostaInformacaoComplementar.pergunta-32"]').type("07022026");
-          cy.get('[aria-label="Fevereiro 7, 2026"]').click();
-          cy.get('[id="transfer-list-item-it-is-a-long-established-fact-that-a-reader-will-be-distracted-by-the-readable-content-of-a-label"]').click();
-          cy.get('[id="transfer-list-item-teste-6-label"]').click();
-          cy.get('[id="transfer-list-item-teste-7-label"]').click();
-          cy.get('[aria-label="Adicionar"]').click();
-        cy.get('[data-cy="next-button"]').click();
-        cy.get('[data-cy="add-button"]').click();
-          cy.get('[data-cy="estado-id"]').click();
-          cy.get('[data-cy="mato-grosso-do-sul"]').click();
-          cy.get('[data-cy="abrangencia-municipio"]').click();
-          cy.get('[data-cy="angelica"]').click().blur();
-          cy.get('[data-cy="abrangencia-confirmar"]').click();
-        cy.get('[data-cy="add-button"]').click();
-          cy.get('[data-cy="estado-id"]').click();
-          cy.get('[data-cy="mato-grosso-do-sul"]').click();
-          cy.get('[data-cy="abrangencia-municipio"]').click();
-          cy.get('[data-cy="campo-grande"]').click().blur();
-          cy.get('[data-cy="abrangencia-confirmar"]').click();
-        cy.get('[data-cy="next-button"]').click();
+        cy.get('[data-cy="titulo"]').type(dados.tituloProposta);
+        cy.get('[data-cy="tipo-evento-id"]').click();
+        cy.get('[data-cy="workshop"]').click();
+        cy.get('[data-cy="search-estado-execucao-evento"]').click();
+        cy.get('[data-cy="mato-grosso-do-sul"]').click();
+        cy.get('[data-cy="search-municipio-execucao-evento"]').click();
+        cy.get('[data-cy="campo-grande"]').click();
+        cy.get('[data-cy="duracao"]').clear().type(dados.duracaoProposta);
+        cy.get('[data-cy="instituicao-executora-id"]').click();
+        cy.get('[data-cy="funda-fundacao"]').click();
+        cy.get('[data-cy="unidade-executora-id"]').click();
+        cy.get('[data-cy="ms-ufms"]').click();
+        cy.get('[data-cy="add-areas-de-conhecimento"]').click();
+        cy.get('[data-cy="grande-area-id"]').click();
+        cy.get('[data-cy="ciencias-agrarias"]').click();
+        cy.get('[data-cy="area-id"').click();
+        cy.get('[data-cy="agronomia"]').click();
+        cy.get('[data-cy="sub-area-id"]').click();
+        cy.get('[data-cy="floricultura-parques-e-jardins"]').click();
+        cy.get('[data-cy="especialidade-id"]').click();
+        cy.get('[data-cy="floricultura"]').click();
+        cy.get('[data-cy="areaDeConhecimento-confirmar"]').click();
         cy.wait(500);
-        cy.get('[data-cy="next-button"]').click();
-        cy.wait(500);
-        cy.get('[data-cy="next-button"]').click();
-        cy.wait(500);
-        cy.get('[data-cy="next-button"]').click();
-        cy.wait(500);
-        cy.get('[data-cy="next-button"]').click();
-          cy.get('[data-cy="formularioPropostaDescritiva.pergunta-33"]').type("Lorem ipsum.");
-          cy.get('[data-cy="formularioPropostaDescritiva.pergunta-34"]').type("Lorem ipsum.");
-          cy.get('[data-cy="formularioPropostaDescritiva.pergunta-36"]').type("Lorem ipsum.");
-          cy.get('[data-cy-in="formularioPropostaDescritiva.pergunta-37-item-0"]').click();
-          cy.get('[data-cy-in="formularioPropostaDescritiva.pergunta-37-item-3"]').click();
-            cy.get('[id="transfer-list-item-dd-label"]').click();
-            cy.get('[id="transfer-list-item-ee-label"]').click();
-          cy.get('[aria-label="Adicionar"]').click();
-        cy.get('[data-cy="next-button"]').click();
-        /*
-          cy.get('[id="mui-8"]').type("1");
-          cy.get('[id="mui-13"]').type("1");
-          cy.get('[id="mui-20"]').type("3");
-          cy.get('[id="mui-21"]').type("2");
-          cy.get('[id="mui-24"]').type("4");
-          cy.get('[id="mui-32"').type("3");
-          cy.get('[id="mui-42"]').type("1");
-        */
-        cy.wait(500);
-        cy.get('[data-cy="next-button"]').click();
-          cy.get('[data-cy="nome-do-pesquisador"]').type("Mateus");
-          cy.wait(500);
-          cy.get('[id="autocomplete-1-listbox"]').contains("Mateus Miranda Seron").click().blur();
-          cy.get('[type="button"]').contains("Adicionar").click();
-          cy.get('[data-cy="nao-button"]').click();
-        cy.get('[data-cy="next-button"]').click();
-          cy.get('[data-cy="add-button"]').click();
-          cy.get('[data-cy="propostaAtividadeForm.titulo"]').type("Título de Atividade");
-          cy.get('[data-cy="propostaAtividadeForm.descricao"]').type("Lorem ipsum.");
-          cy.get('[data-cy="search-mes-inicio"]').click();
-          cy.get('[data-cy="7"]').click();
-          cy.get('[data-cy="search-duracao"]').click();
-          cy.get('[data-cy="4-meses"]').click();
-          cy.get('[data-cy="search-carga-horaria-semanal"]').click();
-          cy.get('[data-cy="4-horas"]').click();
-          cy.get('[data-cy="propostaAtividade-confirmar"]').click();
-        cy.get('[data-cy="next-button"]').click();
-        cy.get('[data-cy="next-button"]').click();
-          cy.get('[data-cy="add-button"]').click();
-          cy.get('[data-cy="estado-id"]').click();
-          cy.get('[data-cy="mato-grosso-do-sul"]').click();
-          cy.get('[data-cy="municipio"]').click();
-          cy.get('[data-cy="campo-grande"]').click();
-          cy.get('[data-cy="mes-previsto"]').click();
-          cy.get('[data-cy="8"]').click();
-          cy.get('[data-cy="rubricaDiariaForm.numeroDiaria"]').type("5");
-          cy.get('[data-cy="rubricaDiariaForm.custoUnitario"]').type("150000");
-          cy.get('[data-cy="rubricaDiariaForm.justificativa"]').type("Lorem ipsum.");
-          cy.get('[data-cy="rubricaDiaria-confirmar"]').click();
-        cy.get('[data-cy="next-button"]').click();
-        cy.get('[data-cy="add-button"]').click();
-          cy.get('[data-cy="rubricaMaterialConsumoForm.especificacao"]').type("Lorem ipsum.");
-          cy.get('[data-cy="search-unidade-medida"]').click();
-          cy.get('[data-cy="litro-l"]').click();
-          cy.get('[data-cy="search-mes-previsto"]').click();
-          cy.get('[data-cy="2"]').click();
-          cy.get('[data-cy="rubricaMaterialConsumoForm.quantidade"]').type("10");
-          cy.get('[data-cy="rubricaMaterialConsumoForm.custoUnitario"]').type("3650");
-          cy.get('[data-cy="rubricaMaterialConsumoForm.justificativa"]').type("Lorem ipsum.");
-          cy.get('[data-cy="rubricaMaterialConsumo-confirmar"]').click();
-        cy.get('[data-cy="next-button"]').click();
-        cy.get('[data-cy="add-button"]').click();
-          cy.get('[data-cy="rubricaMaterialPermanenteForm.especificacao"]').type("Lorem ipsum.");
-          cy.get('[data-cy="tipo-origem"]').click();
-          cy.get('[data-cy="nacional"]').click();
-          cy.get('[data-cy="search-mes-previsto"]').click();
-          cy.get('[data-cy="2"]').click();
-          cy.get('[data-cy="rubricaMaterialPermanenteForm.quantidade"]').type("10");
-          cy.get('[data-cy="rubricaMaterialPermanenteForm.custoUnitario"]').type("3650");
-          cy.get('[data-cy="rubricaMaterialPermanenteForm.justificativa"]').type("Lorem ipsum.");
-          cy.get('[data-cy="rubricaMaterialPermanente-confirmar"]').click();
-        cy.get('[data-cy="next-button"]').click();
-        cy.get('[data-cy="add-button"]').click();
-          cy.get('[data-cy="search-trecho"]').click();
-          cy.get('[data-cy="nacional"]').click();
-          cy.get('[data-cy="search-tipo"]').click();
-          cy.get('[data-cy="aerea"]').click();
-        //Digitei ao invés de selecionar
-          cy.get('[data-cy="ida-volta-box"]').click();
-          cy.get('[data-cy="search-estado-origem-id"]').type("Acre{enter}");
-          cy.get('[data-cy="search-municipio-origem"]').click();
-          cy.get('[data-cy="acrelandia"]').click();
-          cy.get('[data-cy="search-estado-destino-id"]').type("Mato Grosso do Sul{enter}");
-          cy.get('[data-cy="search-municipio-destino"]').click();
-          cy.get('[data-cy="campo-grande"]').click();
-          cy.get('[data-cy="search-mes-previsto"]').click();
-          cy.get('[data-cy="6"]').click();
-          cy.get('[data-cy="rubricaPassagemForm.quantidade"]').type("10");
-          cy.get('[data-cy="rubricaPassagemForm.custoUnitario"]').type("3650");
-          cy.get('[data-cy="rubricaPassagemForm.justificativa"]').type("Lorem ipsum.");
-          cy.get('[data-cy="rubricaPassagem-confirmar"]').click();
-        cy.get('[data-cy="next-button"]').click();
-        cy.get('[data-cy="add-button"]').click();
-          cy.get('[data-cy="search-estado-id"]').click();
-          cy.get('[data-cy="mato-grosso-do-sul"]').click();
-          cy.get('[data-cy="search-municipio"]').click();
-          cy.get('[data-cy="campo-grande"]').click();
-          cy.get('[data-cy="rubricaHospedagemAlimentacaoForm.especificacao"]').type("Lorem ipsum.");
-          cy.get('[data-cy="search-mes-previsto"]').click();
-          cy.get('[data-cy="8"]').click();
-          cy.get('[data-cy="rubricaHospedagemAlimentacaoForm.quantidade"]').type("5");
-          cy.get('[data-cy="rubricaHospedagemAlimentacaoForm.custoUnitario"]').type("150000");
-          cy.get('[data-cy="rubricaHospedagemAlimentacaoForm.justificativa"]').type("Lorem ipsum.");
-          cy.get('[data-cy="rubricaHospedagemAlimentacao-confirmar"]').click();
-        cy.get('[data-cy="next-button"]').click();
-        cy.get('[data-cy="add-button"]').click();
-          cy.get('[data-cy="rubricaServicoTerceiroForm.especificacao"]').type("Lorem ipsum.");
-          cy.get('[data-cy="search-tipo"]').click();
-          cy.get('[data-cy="pessoa-fisica"]').click();
-          cy.get('[data-cy="rubricaServicoTerceiroForm.valorTotal"]').type("750000");
-          cy.get('[data-cy="search-mes-previsto"]').click();
-          cy.get('[data-cy="5"]').click();
-          cy.get('[data-cy="rubricaServicoTerceiroForm.justificativa"]').type("Lorem ipsum.");
-          cy.get('[data-cy="rubricaServicoTerceiro-confirmar"]').click();
-        cy.get('[data-cy="next-button"]').click();
-        cy.get('[data-cy="add-button"]').click();
-          cy.get('[data-cy="rubricaPessoalForm.funcao"]').type("Lorem ipsum.");
-          cy.get('[data-cy="rubricaPessoalForm.formacaoProfissional"]').type("Lorem ipsum.");
-          cy.get('[data-cy="rubricaPessoalForm.perfilDesejado"]').type("Lorem ipsum.");
-          cy.get('[data-cy="search-carga-horaria-semanal"]').click();
-          cy.get('[data-cy="6-horas"]').click();
-          cy.get('[data-cy="search-mes-inicio"]').click();
-          cy.get('[data-cy="7"]').click();
-          cy.get('[data-cy="search-duracao"]').click();
-          cy.get('[data-cy="3-meses"]').click();
-          cy.get('[data-cy="rubricaPessoalForm.custoHoraCustoMes"]').type("750000");
-          cy.get('[data-cy="rubricaPessoalForm.valorTotal"]').type("500000");
-          cy.get('[data-cy="tem-moeda-estrangeira-box"]').click();
-          cy.get('[data-cy="search-moeda-estrangeira-id"]').click();
-          cy.get('[data-cy="dolar-americano"]').click();
-          cy.get('[data-cy="rubricaPessoalForm.justificativa"]').type("Lorem ipsum.");
-          cy.get('[data-cy="rubricaPessoal-confirmar"]').click();
-        cy.get('[data-cy="next-button"]').click();
-        cy.get('[data-cy="add-button"]').click();
-          cy.get('[data-cy="rubricaEncargoForm.especificacao"]').type("Lorem ipsum.");
-          cy.get('[data-cy="rubricaEncargoForm.valorTotal"]').type("69000");
-          cy.get('[data-cy="search-mes-previsto"]').click();
-          cy.get('[data-cy="3"]').click();
-          cy.get('[data-cy="rubricaEncargoForm.justificativa"]').type("Lorem ipsum.");
-          cy.get('[data-cy="rubricaEncargo-confirmar"]').click();
-        cy.get('[data-cy="next-button"]').click();
-        cy.get('[data-cy="add-button"]').click();
-          cy.get('[data-cy="search-modalidade-bolsa-id"]').click();
-          cy.get('[data-cy="at"]').click();
-          cy.get('[data-cy="search-nivel-bolsa-id"]').click();
-          cy.get('[data-cy="nm-r-560-00"]').click();
-          cy.get('[data-cy="rubricaBolsaForm.quantidade"]').type("4");
-          cy.get('[data-cy="search-duracao"]').click();
-          cy.get('[data-cy="5"]').click();
-          cy.get('[data-cy="rubricaBolsaForm.justificativa"]').type("Lorem ipsum.");
-          cy.get('[data-cy="rubricaBolsa-confirmar"]').click();
-        cy.get('[data-cy="next-button"]').click();
-          cy.get('[id="cotacao-moeda-1"]').type("500");
-        cy.get('[data-cy="next-button"]').click();
-        cy.wait(500);
-        cy.get('[data-cy="next-button"]').click();
-        /*
-          cy.get('[data-cy="select-categories-criado-por-usu"]').click();
-          cy.get('[data-cy="documento-de-identificacao-com-f"]').click();
-          cy.get('[data-cy="criadoPor.usuarioAnexo-upload"]')
-          //Force true para forçar o upload do arquivo, mesmo que o elemento esteja oculto ou desabilitado
-            .selectFile('../../downloads/documento-de-identificacao-com-foto.pdf', {force: true});
-        */
-        cy.wait(500);
-        cy.get('[data-cy="next-button"]').click();
-          cy.get('[data-cy="select-categories-documento-prop"]').click();
-          cy.get('[data-cy="documento-1"]').click();
-          cy.get('[data-cy="documentoPropostaAnexo-upload"]')
-            .selectFile('cypress\\fixtures\\rg.pdf', {force: true});
-        cy.get('[data-cy="next-button"]').click();
-        cy.get('[data-cy="next-button"]').click();
-        cy.get('[data-cy="termo-de-aceite-aceito-box"]').click();
-        cy.get('[data-cy="menu-verificar-pendencias"]').click();
         cy.get('[data-cy="menu-salvar"]').click();
-        cy.get('[class="css-1alpf6f ebva1ex2"]').contains('Submeter proposta').click();
-        cy.get('[data-cy="sim-continuar-button"]').click();
-        cy.get('[data-cy="confirmar-button"]').click();
-        cy.get('[data-cy="user-menu"]').should("be.visible");
+        cy.wait(500);
+        cy.get('[data-cy="next-button"]').click();
+      });
+    });
+
+  it("Preencher as informações complementares da proposta", () => {
+    cy.fixture("submeter-proposta").then((dados) => {
+      cy.get('[data-cy="projetos-ver-mais"]').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
+      cy.get('[data-cy="informacoes-complementares"]').click();
+        cy.get('[data-cy="formularioPropostaInformacaoComplementar.pergunta-218-item-mei-faturamento-ano-de-ate-r-81"]').click();
+        cy.get('[data-cy="formularioPropostaInformacaoComplementar.pergunta-219"]').type(dados.descricaoProposta);
+      cy.wait(500);
+      cy.get('[data-cy="menu-salvar"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="next-button"]').click();
+    });
+  });
+  
+  it("Preencher a abrangência da proposta", () => {
+    cy.fixture("submeter-proposta").then((dados) => {
+      cy.get('[data-cy="projetos-ver-mais"]').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
+      cy.get('[data-cy="abrangencia"]').click();
+      cy.get('[data-cy="add-button"]').click();
+        cy.get('[data-cy="estado-id"]').click();
+        cy.get('[data-cy="mato-grosso-do-sul"]').click();
+        cy.get('[data-cy="abrangencia-municipio"]').click();
+        cy.get('[data-cy="angelica"]').click().blur();
+        cy.get('[data-cy="abrangencia-confirmar"]').click();
+      cy.get('[data-cy="add-button"]').click();
+        cy.get('[data-cy="estado-id"]').click();
+        cy.get('[data-cy="mato-grosso-do-sul"]').click();
+        cy.get('[data-cy="abrangencia-municipio"]').click();
+        cy.get('[data-cy="campo-grande"]').click().blur();
+        cy.get('[data-cy="abrangencia-confirmar"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="menu-salvar"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="next-button"]').click();
+    });
+  });
+
+  it("Preencher os dados pessoais na proposta", () => {
+    cy.fixture("submeter-proposta").then((dados) => {
+      cy.get('[data-cy="projetos-ver-mais"]').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
+      cy.get('[data-cy="coordenacao"]').click();
+      cy.get('[data-cy="dados-pessoais"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="menu-salvar"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="next-button"]').click();
+    });
+  });
+
+  it("Preencher o endereço na proposta", () => {
+    cy.fixture("submeter-proposta").then((dados) => {
+      cy.get('[data-cy="projetos-ver-mais"]').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
+      cy.get('[data-cy="coordenacao"]').click();
+      cy.get('[data-cy="endereco"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="menu-salvar"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="next-button"]').click();
+    });
+  });
+      
+  it("Preencher os dados acadêmicos na proposta", () => {
+    cy.fixture("submeter-proposta").then((dados) => {
+      cy.get('[data-cy="projetos-ver-mais"]').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
+      cy.get('[data-cy="coordenacao"]').click();
+      cy.get('[data-cy="dados-academicos"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="menu-salvar"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="next-button"]').click();
+    });
+  });
+
+  it("Preencher os dados profissionais na proposta", () => {
+    cy.fixture("submeter-proposta").then((dados) => {
+      cy.get('[data-cy="projetos-ver-mais"]').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
+      cy.get('[data-cy="coordenacao"]').click();
+      cy.get('[data-cy="dados-profissionais"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="menu-salvar"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="next-button"]').click();
+    });
+  });
+    
+  it("Preencher a descrição de apresentação da proposta", () => {
+    cy.fixture("submeter-proposta").then((dados) => {
+      cy.get('[data-cy="projetos-ver-mais"]').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
+      cy.get('[data-cy="apresentacao"]').click();
+      cy.get('[data-cy="descricao"]').click();
+        cy.get('[data-cy="formularioPropostaDescritiva.pergunta-221-item-opcao-1"]').click();
+        cy.get('[data-cy="formularioPropostaDescritiva.pergunta-222"]').type(dados.valorTextoGenerico);
+      cy.wait(500);
+      cy.get('[data-cy="menu-salvar"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="next-button"]').click();
+    });
+  });
+
+  it("Preencher os indicadores de produção da proposta", () => {
+    cy.fixture("submeter-proposta").then((dados) => {
+      cy.get('[data-cy="projetos-ver-mais"]').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
+      cy.get('[data-cy="apresentacao"]').click();
+      cy.get('[data-cy="indicadores-de-producao"]').click();
+        cy.get(':nth-child(1) > .css-1j6d2zt > :nth-child(1)').type(dados.outroValorQuantidade);
+        cy.get(':nth-child(3) > .css-1j6d2zt > :nth-child(2)').type(dados.outroValorQuantidade);
+        cy.get(':nth-child(9) > .css-1j6d2zt > :nth-child(1)').type(dados.outroValorQuantidade);
+        cy.get(':nth-child(9) > .css-1j6d2zt > :nth-child(2)').type(dados.outroValorQuantidade);
+      cy.wait(500);
+      cy.get('[data-cy="menu-salvar"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="next-button"]').click();
+    });
+  });
+  
+  it("Informar os membros participantes da proposta", () => {
+    cy.fixture("submeter-proposta").then((dados) => {
+      cy.get('[data-cy="projetos-ver-mais"]').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
+      cy.get('[data-cy="apresentacao"]').click();
+      cy.get('[data-cy="membros"]').click();
+        cy.get('[data-cy="nome-do-pesquisador"]').type(dados.nomePesquisador);
+        cy.wait(500);
+        cy.get('[id="autocomplete-1-listbox"]').contains(dados.nomePesquisador).click().blur();
+        cy.get('[type="button"]').contains("Adicionar").click();
+        cy.get('[data-cy="nao-button"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="menu-salvar"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="next-button"]').click();
+    });
+  });
+
+  it("Preencher as atividades da proposta", () => {
+    cy.fixture("submeter-proposta").then((dados) => {
+      cy.get('[data-cy="projetos-ver-mais"]').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
+      cy.get('[data-cy="apresentacao"]').click();
+      cy.get('[data-cy="atividades"]').click();
+        cy.get('[data-cy="add-button"]').click();
+        cy.get('[data-cy="propostaAtividadeForm.titulo"]').type(dados.tituloAtividade);
+        cy.get('[data-cy="propostaAtividadeForm.descricao"]').type(dados.valorTextoGenerico);
+        cy.get('[data-cy="search-mes-inicio"]').click();
+        cy.get('[data-cy="7"]').click();
+        cy.get('[data-cy="search-duracao"]').click();
+        cy.get('[data-cy="4-meses"]').click();
+        cy.get('[data-cy="search-carga-horaria-semanal"]').click();
+        cy.get('[data-cy="4-horas"]').click();
+        cy.get('[data-cy="propostaAtividade-confirmar"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="menu-salvar"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="next-button"]').click();
+    });
+  });
+
+  it("Visualizar as atividades da proposta", () => {
+    cy.fixture("submeter-proposta").then((dados) => {
+      cy.get('[data-cy="projetos-ver-mais"]').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
+      cy.get('[data-cy="apresentacao"]').click();
+      cy.get('[data-cy="visualizacao-das-atividades"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="menu-salvar"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="next-button"]').click();
+    });
+  });
+
+  it("Determinar a faixa de financiamento da proposta", () => {
+    cy.fixture("submeter-proposta").then((dados) => {
+      cy.get('[data-cy="projetos-ver-mais"]').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
+      cy.get('[data-cy="apresentacao"]').click();
+      cy.get('[data-cy="orcamento"]').click();
+      cy.get('[data-cy="faixa-de-financiamento"]').click();
+        cy.get('[data-cy="search-faixa-financiamento-id"]').click();
+        cy.get('[data-cy="faixa-b-r-10-000-01-r-25-000-00"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="menu-salvar"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="next-button"]').click();
+    });
+  });
+  
+  it("Visualizar serviços de terceiros da proposta", () => {
+    cy.fixture("submeter-proposta").then((dados) => {
+      cy.get('[data-cy="projetos-ver-mais"]').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
+      cy.get('[data-cy="apresentacao"]').click();
+      cy.get('[data-cy="orcamento"]').click();
+      cy.get('[data-cy="servicos-de-terceiros"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="menu-salvar"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="next-button"]').click();
+    });
+  });
+
+  it("Preencher informações de bolsa da proposta", () => {
+    cy.fixture("submeter-proposta").then((dados) => {
+      cy.get('[data-cy="projetos-ver-mais"]').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
+      cy.get('[data-cy="apresentacao"]').click();
+      cy.get('[data-cy="orcamento"]').click();
+      cy.get('[data-cy="bolsa"]').click();
+      cy.get('[data-cy="add-button"]').click();
+        cy.get('[data-cy="search-modalidade-bolsa-id"]').click();
+        cy.get('[data-cy="at"]').click();
+        cy.get('[data-cy="search-nivel-bolsa-id"]').click();
+        cy.get('[data-cy="ns-r-770-00"]').click();
+        cy.get('[data-cy="rubricaBolsaForm.quantidade"]').type(dados.valorQuantidade);
+        cy.get('[data-cy="search-duracao"]').click();
+        cy.get('[data-cy="5"]').click();
+        cy.get('[data-cy="rubricaBolsa-confirmar"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="menu-salvar"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="next-button"]').click();
+    });
+  });
+
+  it("Visualizar consolidação da proposta", () => {
+    cy.fixture("submeter-proposta").then((dados) => {
+      cy.get('[data-cy="projetos-ver-mais"]').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
+      cy.get('[data-cy="apresentacao"]').click();
+      cy.get('[data-cy="orcamento"]').click();
+      cy.get('[data-cy="consolidacao"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="menu-salvar"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="next-button"]').click();
+    });
+  });
+
+  it("Visualizar o que foi solicitado à fundação sobre a proposta", () => {
+    cy.fixture("submeter-proposta").then((dados) => {
+      cy.get('[data-cy="projetos-ver-mais"]').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
+      cy.get('[data-cy="apresentacao"]').click();
+      cy.get('[data-cy="orcamento"]').click();
+      cy.get('[data-cy="solicitado-a-fundacao"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="menu-salvar"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="next-button"]').click();
+    });
+  });
+  
+  it("Anexar arquivos de documentos pessoais na proposta", () => {
+    cy.fixture("submeter-proposta").then((dados) => {
+      cy.get('[data-cy="projetos-ver-mais"]').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
+      cy.get('[data-cy="anexos"]').click();
+      cy.get('[data-cy="documentos-pessoais"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="menu-salvar"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="next-button"]').click();
+    });
+  });
+  
+  it("Anexar arquivo de carta de apresentação da proposta", () => {
+    cy.fixture("submeter-proposta").then((dados) => {
+      cy.get('[data-cy="projetos-ver-mais"]').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
+      cy.get('[data-cy="anexos"]').click();
+      cy.get('[data-cy="documentos-da-proposta"]').click();
+        cy.get('[data-cy="select-categories-documento-prop"]').click();
+        cy.get('[data-cy="carta-de-apresentacao"]').click();
+        cy.get('[data-cy="documentoPropostaAnexo-upload"]')
+          .selectFile(dados.arquivoPDF, {force: true});
+      cy.wait(500);
+      cy.get('[data-cy="menu-salvar"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="next-button"]').click();
+    });
+  });
+
+  it("Visualizar a proposta", () => {
+    cy.fixture("submeter-proposta").then((dados) => {
+      cy.get('[data-cy="projetos-ver-mais"]').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
+      cy.get('[data-cy="finalizacao"]').click();
+      cy.get('[data-cy="visualizacao-da-proposta"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="menu-salvar"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="next-button"]').click();
+    });
+  });
+
+   it("Aceitar termos, verificar pêndencias e submeter a proposta", () => {
+    cy.fixture("submeter-proposta").then((dados) => {
+      cy.get('[data-cy="projetos-ver-mais"]').click();
+      cy.get(':nth-child(2) > .css-k9f5ec > .css-kbi0st > .css-xb68j8 > .css-vsxyhc > :nth-child(2)').click();
+      cy.get('[data-cy="finalizacao"]').click();
+      cy.get('[data-cy="termo-de-aceite"]').click();
+      cy.get('[data-cy="termo-de-aceite-aceito-box"]').click();
+      cy.get('[data-cy="menu-verificar-pendencias"]').click();
+      cy.wait(500);
+      cy.get('[data-cy="menu-salvar"]').click();
+      cy.wait(500);
+      cy.get('[class="css-1alpf6f ebva1ex2"]').contains('Submeter proposta').click();
+      //cy.get('[data-cy="sim-continuar-button"]').click();
+      //cy.get('[data-cy="confirmar-button"]').click();
+      //cy.get('[data-cy="user-menu"]').should("be.visible");
       });
     });
   });
