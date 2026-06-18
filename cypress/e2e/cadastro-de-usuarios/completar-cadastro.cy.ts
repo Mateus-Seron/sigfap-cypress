@@ -1,4 +1,4 @@
-describe("[F-03] Cadastro Completo de Usuários", () => {
+describe("[F-02] Cadastro Completo de Usuários", () => {
   beforeEach(() => {
     // Realizar login e acessar pagina de edição de perfil
     cy.fixture("completar-cadastro")
@@ -115,8 +115,7 @@ describe("[F-03] Cadastro Completo de Usuários", () => {
     });
   });
 
-  context(
-    "CT-SIG-CADASTRO-004 - Cadastro Completo com valor inválido no campo País",
+  context("[CT-SIG-CADASTRO-004] Cadastro Completo com valor inválido no campo País",
     () => {
       it("Preencher o nome de cidade no campo país e o sistema não salvar o valor inválido", () => {
         cy.fixture("completar-cadastro").then((dados) => {
@@ -136,8 +135,7 @@ describe("[F-03] Cadastro Completo de Usuários", () => {
     },
   );
 
-  context(
-    "CT-SIG-CADASTRO-005 - Cadastro Completo com valor numerico nos campos Nome e Nome-Social",
+  context("[CT-SIG-CADASTRO-005] Cadastro Completo com valor numerico nos campos Nome e Nome-Social",
     () => {
       it("Preencher os campos com valores numéricos e o sistema não permite finalizar", () => {
         cy.fixture("completar-cadastro").then((dados) => {

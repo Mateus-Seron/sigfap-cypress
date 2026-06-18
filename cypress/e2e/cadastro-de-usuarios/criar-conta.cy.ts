@@ -1,12 +1,12 @@
 import { toCyString } from "../../helpers/kebab.helper";
 
-describe("Criação de conta no sistema", () => {
+describe("[F-01] Criação de conta no sistema", () => {
   
   beforeEach(() => {
     cy.visit("/");
   });
 
-  context("Criação de conta com dados válidos", () => {
+  context("[CT-SIG-CADASTRO-001] Criação de conta com dados válidos", () => {
 
     it("Teste para criação de conta com dados válidos", () => {
       cy.get('[data-cy="register-button"]').click(); //clica no botão "Criar conta" para iniciar o processo de criação de conta.
@@ -40,7 +40,7 @@ describe("Criação de conta no sistema", () => {
     });
   });
 
-  context("CT-SIG-CADASTRO-002 - Criação de conta com caminho alternativo", () => {
+  context("[CT-SIG-CADASTRO-002] Criação de conta com caminho alternativo", () => {
  
     it("Teste para criação de conta com negação dos termos de uso", () => {
       cy.get('[data-cy="register-button"]').click(); //clica no botão "Criar conta" para iniciar o processo de criação de conta.
