@@ -1,6 +1,6 @@
 import { toCyString } from "../../helpers/kebab.helper";
 
-describe("Submissão de proposta no sistema", () => {
+describe("[F-03] Submissão de proposta no sistema", () => {
 
   beforeEach(() => {
     cy.fixture("submeter-proposta")
@@ -10,7 +10,7 @@ describe("Submissão de proposta no sistema", () => {
     });
   });
 
-  context("Submissão de proposta com dados válidos", () => {
+  context("[CT-SIG-PROPOSTA-003] Submissão de proposta com dados válidos", () => {
 
     it("Preencher as informações iniciais da proposta", () => {
       cy.fixture("submeter-proposta").then((dados) => {
