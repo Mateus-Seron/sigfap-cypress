@@ -1,15 +1,14 @@
 import { toCyString } from "../../helpers/kebab.helper";
 
 describe("[F-03] Submissão de proposta no sistema", () => {
-
   beforeEach(() => {
     cy.fixture("submeter-proposta")
-    .as("dados")
-    .then((dados) => {
-      cy.typeLogin(dados.email, dados.senha);
-    });
+      .as("dados")
+      .then((dados) => {
+        cy.typeLogin(dados.email, dados.senha);
+      });
   });
-/*
+ 
   context("[CT-SIG-PROPOSTA-001] Submissão de proposta com dados válidos", () => {
 
     it("Preencher as informações iniciais da proposta", () => {
@@ -365,12 +364,11 @@ describe("[F-03] Submissão de proposta no sistema", () => {
       });
     });
   });
-*/
 
-  context("[F-02] Título do Projeto - regras de negócio", () => {
+  context("[CT-SIG-PROPOSTA-002] Submissão de proposta com dados inválidos", () => {
     beforeEach(() => {
       cy.get('[data-cy="editais-ver-mais"]').click();
-      cy.get(':nth-child(6) > .css-1g8exof > .css-qvg66t').click();
+      cy.get(":nth-child(6) > .css-1g8exof > .css-qvg66t").click();
       cy.get('[class="css-1dimcyp e19ekcfn59"]')
         .contains("Edital 2026-0001 Sig Cypress")
         .should("be.visible");
@@ -378,40 +376,17 @@ describe("[F-03] Submissão de proposta no sistema", () => {
       cy.get('[data-cy="titulo"]').should("be.visible");
     });
 
-    it("deve ser um campo do tipo texto", () => {
+    it("Verificar se o sistema impede o preenchimento de campos numéricos no campo de título", () => {
       cy.get('[data-cy="titulo"]')
         .should("match", "input, textarea")
         .and("not.have.attr", "type", "number");
-    });
-
-    it("deve aceitar no máximo 128 caracteres", () => {
-      const titulo129Caracteres = "A".repeat(129);
-
-      cy.get('[data-cy="titulo"]')
-        .should("have.attr", "maxlength", "128")
-        .clear()
-        .type(titulo129Caracteres);
-
-      cy.get('[data-cy="titulo"]')
-        .invoke("val")
-        .should("have.length", 128);
-    });
-
-    it("deve ser obrigatório e impedir o salvamento quando vazio", () => {
-      cy.get('[data-cy="titulo"]').should("have.value", "");
-
-      cy.url().then((urlAntes) => {
-        cy.get('[data-cy="menu-salvar"]').click();
-        cy.wait(500);
-        cy.get('[data-cy="titulo"]').should("have.value", "");
-        cy.url().should("eq", urlAntes);
-      });
     });
   });
-  context("[F-02] Título do Projeto - regras de negócio", () => {
+
+  context("[CT-SIG-PROPOSTA-003] Submissão de proposta com dados inválidos", () => {
     beforeEach(() => {
       cy.get('[data-cy="editais-ver-mais"]').click();
-      cy.get(':nth-child(6) > .css-1g8exof > .css-qvg66t').click();
+      cy.get(":nth-child(6) > .css-1g8exof > .css-qvg66t").click();
       cy.get('[class="css-1dimcyp e19ekcfn59"]')
         .contains("Edital 2026-0001 Sig Cypress")
         .should("be.visible");
@@ -419,13 +394,7 @@ describe("[F-03] Submissão de proposta no sistema", () => {
       cy.get('[data-cy="titulo"]').should("be.visible");
     });
 
-    it("deve ser um campo do tipo texto", () => {
-      cy.get('[data-cy="titulo"]')
-        .should("match", "input, textarea")
-        .and("not.have.attr", "type", "number");
-    });
-
-    it("deve aceitar no máximo 128 caracteres", () => {
+    it("Verificar se o sistema impede a inserção de mais de 128 caracteres no campo de título", () => {
       const titulo129Caracteres = "A".repeat(129);
 
       cy.get('[data-cy="titulo"]')
@@ -433,12 +402,22 @@ describe("[F-03] Submissão de proposta no sistema", () => {
         .clear()
         .type(titulo129Caracteres);
 
-      cy.get('[data-cy="titulo"]')
-        .invoke("val")
-        .should("have.length", 128);
+      cy.get('[data-cy="titulo"]').invoke("val").should("have.length", 128);
+    });
+  });
+
+  context("[CT-SIG-PROPOSTA-004] Submissão de proposta com dados inválidos", () => {
+    beforeEach(() => {
+      cy.get('[data-cy="editais-ver-mais"]').click();
+      cy.get(":nth-child(6) > .css-1g8exof > .css-qvg66t").click();
+      cy.get('[class="css-1dimcyp e19ekcfn59"]')
+        .contains("Edital 2026-0001 Sig Cypress")
+        .should("be.visible");
+      cy.get('[data-cy="criar-proposta"]').click();
+      cy.get('[data-cy="titulo"]').should("be.visible");
     });
 
-    it("deve ser obrigatório e impedir o salvamento quando vazio", () => {
+    it("Verificar se o sistema impede o salvamento quando o campo de título está vazio", () => {
       cy.get('[data-cy="titulo"]').should("have.value", "");
 
       cy.url().then((urlAntes) => {
