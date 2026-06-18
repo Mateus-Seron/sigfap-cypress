@@ -10,7 +10,7 @@ describe("[F-03] Submissão de proposta no sistema", () => {
     });
   });
 
-  context("[CT-SIG-PROPOSTA-003] Submissão de proposta com dados válidos", () => {
+  context("[CT-SIG-PROPOSTA-001] Submissão de proposta com dados válidos", () => {
 
     it("Preencher as informações iniciais da proposta", () => {
       cy.fixture("submeter-proposta").then((dados) => {
